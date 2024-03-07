@@ -1,7 +1,7 @@
 
 const { openInquiryButtonTestFunction } = require('./forum');
 //my test
-export function testOpenContactFormButton() {
+function testOpenContactFormButton() {
     const btn2 = document.getElementById("btn2");
 
     if (!btn2) {
