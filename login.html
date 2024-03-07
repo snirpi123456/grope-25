@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="he">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>התחברות</title>
+    <link rel="stylesheet" href="style.css">
+    <title>דף התחברות </title>
     <title>The Right To Know The Right To Be</title>
 </head>
+
 <body>
-    <h2> התחברות</h2>
-    <form action="/path-to-server-endpoint" method="POST">
-        <div>
-            <label for="username">שם משתמש:</label>
-            <input type="text" id="username" name="username" required>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>צור חשבון</h1>
+                <span>או השתמש בדואר האלקטרוני שלך לרישום</span>
+                <input type="text" placeholder="שם">
+                <input type="email" placeholder="אימייל">
+                <input type="password" placeholder="סיסמה">
+                <button>הרשם</button>
+            </form>
         </div>
-        <div>
-            <label for="password">סיסמה:</label>
-            <input type="password" id="password" name="password" required>
+        <div class="form-container sign-in">
+            <form>
+                <h1>התחבר</h1>
+                <span>או השתמש בדואר האלקטרוני ובסיסמה שלך</span>
+                <input type="email" placeholder="אימייל">
+                <input type="password" placeholder="סיסמה">
+                <a href="#">שכחת את הסיסמה?</a>
+                <button>התחבר</button>
+            </form>
         </div>
-        <div>
-            <button type="submit">כניסה</button>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>ברוך השב!</h1>
+                    <p>הכנס את פרטיך האישיים כדי להשתמש בכל האפשרויות באתר</p>
+                    <button class="hidden" id="login">התחבר</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>שלום, חבר!</h1>
+                    <p>הרשם עם פרטיך האישיים כדי להשתמש בכל האפשרויות באתר</p>
+                    <button class="hidden" id="register">הרשם</button>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
+#new login page 
