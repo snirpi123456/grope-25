@@ -1,5 +1,10 @@
+import  {testOpenContactFormButton}  from './forum_test';
+
+testOpenContactFormButton();
+
 document.getElementById("btn2").addEventListener("click", function() {
     document.getElementById("contactForm").style.display = "block";
+    
 });
 
 document.getElementById("submitBtn").addEventListener("click", function() {
