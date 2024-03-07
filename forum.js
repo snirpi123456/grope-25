@@ -1,29 +1,25 @@
 document.getElementById("btn2").addEventListener("click", function() {
-    document.querySelector("input[type='text']").removeAttribute("disabled");
-    let textValue = document.querySelector("input[type='text']").value
-    document.getElementById("btn1").style.display = "inline-block";
-});
-document.getElementById("btn1").onclick=function(){
-    document.getElementById("btn1").innerHTML="נשלח";
-    document.getElementById("par1").innerHTML="שאלתך נשמרה במערכת";
-    document.getElementById("parQF").value+=textValue;
-
-}
-var categories = ["מלגות", "תעסוקה", "שיכון", "מיסים"];
-
-var categoryBar = document.createElement("div");
-categoryBar.id = "categoryBar";
-
-categories.forEach(function(category) {
-    var categoryButton = document.createElement("button");
-    categoryButton.textContent = category;
-    categoryButton.addEventListener("click", function() {
-        document.querySelector("input[type='text']").removeAttribute("disabled");
-        document.getElementById("btn1").style.display = "inline-block";
-        document.getElementById("par1").textContent = "קטגוריה: " + category;
-    });
-    categoryBar.appendChild(categoryButton);
+    document.getElementById("contactForm").style.display = "block";
 });
 
-document.body.insertBefore(categoryBar, document.getElementById("btn2"));
+document.getElementById("submitBtn").addEventListener("click", function() {
+    var category = document.getElementById("categorySelect").value;
+    var subject = document.getElementById("subjectInput").value;
+    var question = document.getElementById("questionInput").value;
+    
+    if (!category || !subject.trim() || !question.trim()) {
+        alert("Please fill in all fields.");
+        return;
+    }
 
+    // Handle sending the request (you can implement this part as needed)
+    alert("Request sent successfully!");
+    
+    // Clear form inputs
+    document.getElementById("categorySelect").selectedIndex = 0;
+    document.getElementById("subjectInput").value = "";
+    document.getElementById("questionInput").value = "";
+
+    // Hide the contact form
+    document.getElementById("contactForm").style.display = "none";
+});

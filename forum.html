@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
-    <meta charset="utf-8">
-    <title>blah</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פורום שאלות</title>
+    <link rel="stylesheet" href="styleForum.css">
 </head>
-<body>
-    <p id="parQF"></p>
-    <button id="btn2">פתיחת פניה חדשה</button>
-    <input type="text" disabled></input>
-    <p id="par1"></p>
-    <button id="btn1" style="display:none;">שלח</button>
-    <div id="categoryBar"></div>
-    <script src="JS/forum.js"></script>
+<body dir="rtl">
+    <div class="container">
+        <h1>פורום שאלות</h1>
+        <button id="btn2">פתיחת פניה חדשה</button>
+        <div id="contactForm" style="display: none;">
+            <select id="categorySelect">
+                <option value="" disabled selected>בחר קטגוריה</option>
+                <option value="שיכון">שיכון</option>
+                <option value="מיסים">מיסים</option>
+                <option value="מלגות">מלגות</option>
+                <option value="תעסוקה">תעסוקה</option>
+            </select>
+            <input type="text" id="subjectInput" placeholder="נושא">
+            <input type="text" id="questionInput" placeholder="השאלה שלך...">
+            <button id="submitBtn">שלח</button>
+        </div>
+        <div id="questionsContainer"></div>
+    </div>
+    <script src="forum.js"></script>
 </body>
 </html>
