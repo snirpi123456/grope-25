@@ -46,7 +46,7 @@ body{
 }
 
 .container button{
-    background-color: #512da8;
+    background-color: #49124e;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -108,13 +108,13 @@ body{
     height: 20px;
     padding: 3px;
     background-clip: content-box;
-    border: 2px solid #512da8;
+    border: 2px solid #49124e;
     background-color: #fff;
     border-radius: 50%;
 }
 
 .user-type input[type="radio"]:checked {
-    background-color: #512da8;
+    background-color: #49124e;
 }
 
 .user-type label {
@@ -184,9 +184,9 @@ body{
 }
 
 .toggle{
-    background-color: #512da8;
+    background-color: #49124e;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right, #8e1899, #49124e);
     color: #fff;
     position: relative;
     left: -100%;
