@@ -1,65 +1,61 @@
 <!DOCTYPE html>
 <html lang="he">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style login page.css">
-    <title>דף התחברות </title>
-    <title>The Right To Know The Right To Be</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style login page.css">
+        <title>דף התחברות</title>
+    </head>
 
-<body>
+    <body>
 
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form>
-                <h1>צור חשבון</h1>
-                <span>או השתמש בדואר האלקטרוני שלך לרישום</span>
-                <input type="text" placeholder="שם">
-                <input type="email" placeholder="אימייל">
-                <input type="password" placeholder="סיסמה">
-                <div class="user-type">
-                    <h3>בחר סוג משתמש:</h3>
-                    <div>
-                        <input type="radio" id="userType1" name="userType" value="type1" checked>
-                        <label for="userType1"> משתמש</label>
+        <div class="container" id="container">
+            <div class="form-container sign-up">
+                <form id="formSignUp">
+                    <h1>צור חשבון</h1>
+                    <span> השתמש בדואר האלקטרוני שלך לרישום</span>
+                    <input type="text" id="name" placeholder="שם">
+                    <input type="email" id="email" placeholder="אימייל">
+                    <input type="password" id="password" placeholder="סיסמה">
+                    <div class="user-type">
+                        <h3>בחר סוג משתמש:</h3>
+                        <div>
+                            <input type="radio" id="userTypeRegular" name="userType" value="regular" checked>
+                            <label for="userTypeRegular">משתמש</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="userTypeLawyer" name="userType" value="lawyer">
+                            <label for="userTypeLawyer">עורך דין</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" id="userType2" name="userType" value="type2">
-                        <label for="userType2">עורך דין</label>
+                    <button type="button" id="registerButton">הרשם</button>
+                </form>
+            </div>
+            <div class="form-container sign-in">
+                <form id="formSignIn">
+                    <h1>התחבר</h1>
+                    <span> השתמש בדואר האלקטרוני ובסיסמה שלך</span>
+                    <input type="email" id="loginEmail" placeholder="אימייל">
+                    <input type="password" id="loginPassword" placeholder="סיסמה">
+                    <a href="#">שכחת את הסיסמה?</a>
+                    <button type="button" id="loginButton">התחבר</button>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <button class="hidden" id="login">התחבר</button>
                     </div>
-                </div>
-                <button>הרשם</button>
-            </form>
-        </div>
-        <div class="form-container sign-in">
-            <form>
-                <h1>התחבר</h1>
-                <span>או השתמש בדואר האלקטרוני ובסיסמה שלך</span>
-                <input type="email" placeholder="אימייל">
-                <input type="password" placeholder="סיסמה">
-                <a href="#">שכחת את הסיסמה?</a>
-                <button>התחבר</button>
-            </form>
-        </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>ברוך השב!</h1>
-                    <p>הכנס את פרטיך האישיים כדי להשתמש בכל האפשרויות באתר</p>
-                    <button class="hidden" id="login">התחבר</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>שלום, חבר!</h1>
-                    <p>הרשם עם פרטיך האישיים כדי להשתמש בכל האפשרויות באתר</p>
-                    <button class="hidden" id="register">הרשם</button>
+                    <div class="toggle-panel toggle-right">
+                        <button class="hidden" id="register">הרשם</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+
+    </body>
 
 </html>
