@@ -3,11 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Review System</title>
+  <title>Modern Review System</title>
   <style>
-    /* Style for the stars */
+    body {
+      font-family: 'Rubik', 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      width: 300px;
+      margin-right: 20px;
+    }
+
+    .reviews-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      width: 400px;
+    }
+
     .rating {
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
     }
 
     .rating input {
@@ -16,75 +47,141 @@
 
     .rating label {
       font-size: 30px;
-      color: #ccc;
+      color: #ddd;
+      margin: 0 5px;
       cursor: pointer;
     }
 
     .rating label:hover,
-    .rating label:hover ~ label,
     .rating input:checked ~ label {
       color: #ffc107;
     }
 
-    /* Style for the review text box */
     #review-text {
       width: 100%;
-      height: 100px;
-      margin-top: 20px;
+      height: 80px;
+      margin-bottom: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      direction: rtl; /* Set right-to-left direction */
     }
 
-    /* Style for the submit button (optional) */
     #submit-btn {
-      display: block;
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #4caf50;
+      background-color: #49124e;
       color: #fff;
+      padding: 10px 20px;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
+    }
+
+    #submit-btn:hover {
+      background-color: #49124e;
+    }
+
+    .review {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      direction: rtl;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .star {
+      font-size: 20px;
+      color: #ffc107;
     }
   </style>
 </head>
 <body>
 
-  <h1>ביקורת</h1>
-
-  <!-- Star rating system -->
-  <div class="rating">
-    <input type="radio" id="star5" name="rating" value="5">
-    <label for="star5">☆</label>
-    <input type="radio" id="star4" name="rating" value="4">
-    <label for="star4">☆</label>
-    <input type="radio" id="star3" name="rating" value="3">
-    <label for="star3">☆</label>
-    <input type="radio" id="star2" name="rating" value="2">
-    <label for="star2">☆</label>
-    <input type="radio" id="star1" name="rating" value="1">
-    <label for="star1">☆</label>
+  <div class="container">
+    <h1>ביקורת</h1>
+    <div class="rating">
+      <input type="radio" id="star5" name="rating" value="5">
+      <label for="star5">☆</label>
+      <input type="radio" id="star4" name="rating" value="4">
+      <label for="star4">☆</label>
+      <input type="radio" id="star3" name="rating" value="3">
+      <label for="star3">☆</label>
+      <input type="radio" id="star2" name="rating" value="2">
+      <label for="star2">☆</label>
+      <input type="radio" id="star1" name="rating" value="1">
+      <label for="star1">☆</label>
+    </div>
+    <textarea id="review-text" placeholder="כתוב ביקורת כאן..."></textarea>
+    <button id="submit-btn" onclick="submitReview()">שלח ביקורת</button>
   </div>
 
-  <!-- Review text box -->
-  <textarea id="review-text" placeholder="כתוב ביקורת כאן..."></textarea>
-
-  <!-- Submit button (you can customize this) -->
-  <button id="submit-btn" onclick="submitReview()">שלח ביקורת</button>
+  <!-- Display submitted reviews -->
+  <div class="reviews-container">
+    <h2>ביקורות</h2>
+    <div id="reviews-list"></div>
+  </div>
 
   <script>
-    // JavaScript function to handle the review submission
     function submitReview() {
-      // Get the selected rating
       const rating = document.querySelector('input[name="rating"]:checked');
-      // Get the review text
       const reviewText = document.getElementById('review-text').value;
 
-      // Check if a rating is selected
       if (rating) {
-        alert(`Rating: ${rating.value}\nReview: ${reviewText}`);
-        // You can send the data to your server for further processing here
+        const reviewData = {
+          rating: rating.value,
+          reviewText: reviewText
+        };
+
+        saveReview(reviewData);
+        displayReviews();
+        clearForm();
       } else {
         alert("Please select a rating");
       }
     }
+
+    function saveReview(reviewData) {
+      const existingReviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      existingReviews.push(reviewData);
+      localStorage.setItem('reviews', JSON.stringify(existingReviews));
+    }
+
+    function clearForm() {
+      document.querySelector('input[name="rating"]:checked').checked = false;
+      document.getElementById('review-text').value = '';
+    }
+
+    function displayReviews() {
+      const reviewsContainer = document.getElementById('reviews-list');
+      reviewsContainer.innerHTML = '';
+
+      const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      reviews.forEach((review, index) => {
+        const reviewElement = document.createElement('div');
+        reviewElement.classList.add('review');
+        reviewElement.innerHTML = `
+          <div class="stars">${getStars(review.rating)}</div>
+          <p><strong>ביקורת:</strong> ${review.reviewText}</p>
+        `;
+        reviewsContainer.appendChild(reviewElement);
+      });
+    }
+
+    function getStars(rating) {
+      const stars = Array.from({ length: parseInt(rating, 10) }, (_, index) => index + 1);
+      return stars.map(() => '<span class="star">☆</span>').join('');
+    }
+
+    // Initial display of reviews when the page loads
+    displayReviews();
   </script>
 
 </body>
