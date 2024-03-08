@@ -17,34 +17,40 @@ function testOpenContactFormButton() {
 }
 
 //test AI
-// Test openInquiryButtonTestFunction is called
-test('calls openInquiryButtonTestFunction', () => {
-    document.body.innerHTML = '<button id="btn2">Open Form</button>';
-  
-    const openInquiryButtonTestFunction = jest.fn();
-  
-    testOpenContactFormButton();
-  
-    expect(openInquiryButtonTestFunction).toHaveBeenCalled();
-  });
-  
-  // Test error logged if no btn2
-  test('logs error if no btn2', () => {
-    const spy = jest.spyOn(console, 'error');
-    
-    testOpenContactFormButton();
-  
-    expect(spy).toHaveBeenCalledWith("Button 'Open Contact Form' is missing.");
-  }); 
-  
-  // Test btn2 click logged
-  test('logs btn2 click', () => {
-    document.body.innerHTML = '<button id="btn2">Open Form</button>';
-  
-    const spy = jest.spyOn(console, 'log');
-  
-    testOpenContactFormButton();
-  
-    expect(spy).toHaveBeenCalledWith("Button 'Open Contact Form' was clicked.");
-  });
+// Unit tests for the button click event listener
+describe('Button click event listener', () => {
+    it('Should display the contact form when button is clicked', () => {
+        document.getElementById("btn2").click();
+        expect(document.getElementById("contactForm").style.display).toBe("block");
+    });
+});
 
+// Unit tests for the button click event listener
+describe('Button click event listener', () => {
+    it('Should display the contact form when button is clicked', () => {
+        document.getElementById("btn2").click();
+        expect(document.getElementById("contactForm").style.display).toBe("block");
+    });
+});
+
+// Unit tests for the submit button click event listener
+describe('Submit button click event listener', () => {
+    it('Should save the question in localStorage when all fields are filled', () => {
+        document.getElementById("categorySelect").value = "שיכון";
+        document.getElementById("subjectInput").value = "כותרת נושא";
+        document.getElementById("questionInput").value = "זו השאלה שלי";
+        document.getElementById("submitBtn").click();
+        const storedQuestions = localStorage.getItem('questions');
+        // Check if the question is saved in localStorage
+        expect(storedQuestions).toContain("קטגוריה: שיכון");
+        expect(storedQuestions).toContain("נושא: כותרת נושא");
+        expect(storedQuestions).toContain("שאלה: זו השאלה שלי");
+    });
+
+    it('Should show an alert when category is not selected', () => {
+        document.getElementById("categorySelect").value = "";
+        document.getElementById("submitBtn").click();
+        // Check if an alert is shown
+        expect(window.alert).toHaveBeenCalled();
+    });
+});
