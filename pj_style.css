@@ -1,0 +1,92 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl; /* כיוון טקסט מימין לשמאל */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ממרכז את התוכן */
+}
+
+header {
+    background-color: #49124e;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+}
+
+nav button {
+    background-color: transparent;
+    border: none;
+    color: #49124e;
+    margin: 0 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background-color: #6d1a74;
+    color: #fff;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #49124e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.button-container button:hover {
+    background-color: #6d1a74;
+}
+
+footer {
+    background-color: #49124e;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* סגנון נוסף עבור הכותרת והפסקה במרכז הדף */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px; /* כדי ליצור מרווח בין הכותרת והפסקה לבאים אחרי */
+}
+
+.welcome-section h2 {
+    font-size: 24px;
+    color: #49124e;
+    margin-bottom: 10px; /* מרווח בין הכותרת לפסקה */
+}
+
+.welcome-section p {
+    font-size: 18px;
+    color: #333;
+}

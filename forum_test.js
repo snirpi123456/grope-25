@@ -17,13 +17,6 @@ function testOpenContactFormButton() {
 }
 
 //test AI
-// Unit tests for the button click event listener
-describe('Button click event listener', () => {
-    it('Should display the contact form when button is clicked', () => {
-        document.getElementById("btn2").click();
-        expect(document.getElementById("contactForm").style.display).toBe("block");
-    });
-});
 
 // Unit tests for the button click event listener
 describe('Button click event listener', () => {
