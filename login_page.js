@@ -1,8 +1,14 @@
+const adminUser = {
+    email: "admin@admin.com",
+    password: "admin123",
+    role: "admin"
+};
+
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
 
-// החלפת מצב ההפעלה של הקונטיינר
+
 registerBtn.addEventListener('click', () => {
     container.classList.add("active");
 });
@@ -11,7 +17,7 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
-// שמירת נתוני המשתמש
+
 function saveUserData() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -34,15 +40,22 @@ function saveUserData() {
     alert('נתוני המשתמש נשמרו בהצלחה');
 }
 
-// אימות המשתמש
+
 function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
+
+    if(enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
+        alert('התחברת בהצלחה כאדמין!');
+        window.location.href = 'homePage.html';
+        return;
+    }
 
     const userData = JSON.parse(localStorage.getItem('userData'));
 
     if (userData.email === enteredEmail && userData.password === enteredPassword) {
         alert('התחברת בהצלחה!');
+        window.location.href = 'homePage.html';
     } else {
         alert('כתובת האימייל או הסיסמה שגויים');
     }
