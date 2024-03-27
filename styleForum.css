@@ -64,3 +64,51 @@ button:hover {
 #submitBtn:hover {
     background-color: #0056b3; /* Darker blue color on hover */
 }
+.categories {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.categories li {
+    margin: 5px;
+}
+
+.categoryButton {
+    padding: 10px 20px;
+    background-color: #6A0DAD;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoryButton:hover {
+    background-color: #4E089B;
+}
+
+/* עיצוב רשימת הקטגוריות */
+#categoryList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categoryItem {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoryItem:hover {
+    background-color: #e0e0e0;
+}
+
+.storageTitle {
+    color: #4E089B; /* כתום כחול */
+    font-weight: bold; /* מודגש */
+}
