@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="he">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="login_page.css">
+        <title>דף התחברות</title>
+    </head>
+
+    <body>
+
+        <div class="container" id="container">
+            <div class="form-container sign-up">
+                <form id="formSignUp">
+                    <h1>צור חשבון</h1>
+                    <span> השתמש בדואר האלקטרוני שלך לרישום</span>
+                    <input type="text" id="name" placeholder="שם">
+                    <input type="email" id="email" placeholder="אימייל">
+                    <input type="password" id="password" placeholder="סיסמה">
+                    <div class="user-type">
+                        <h3>בחר סוג משתמש:</h3>
+                        <div>
+                            <input type="radio" id="userTypeRegular" name="userType" value="regular" checked>
+                            <label for="userTypeRegular">משתמש</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="userTypeLawyer" name="userType" value="lawyer">
+                            <label for="userTypeLawyer">עורך דין</label>
+                        </div>
+                    </div>
+                    <button type="button" id="registerButton">הרשם</button>
+                </form>
+            </div>
+            <div class="form-container sign-in">
+                <form id="formSignIn">
+                    <h1>התחבר</h1>
+                    <span> השתמש בדואר האלקטרוני ובסיסמה שלך</span>
+                    <input type="email" id="loginEmail" placeholder="אימייל">
+                    <input type="password" id="loginPassword" placeholder="סיסמה">
+                    <a href="#">שכחת את הסיסמה?</a>
+                    <button type="button" id="loginButton">התחבר</button>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <button class="hidden" id="login">התחבר</button>
+                    </div>
+                    <div class="toggle-panel toggle-right">
+                        <button class="hidden" id="register">הרשם</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+
+    </body>
+
+</html>
