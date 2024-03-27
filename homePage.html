@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> R&R </title>
+    <link rel="stylesheet" href="pj_style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Right to be & Right to know</h1>
+    </header>
+    <nav>
+        <button onclick="openPersonalArea()">איזור אישי</button>
+        <button onclick="openTaxes()">מיסים</button>
+        <button onclick="openHousing()">שיכון</button>
+        <button onclick="openEmployment()">תעסוקה</button>
+        <button onclick="openGrant()">מלגה</button>
+        <button onclick="openContact()">יצירת קשר</button>
+        <button onclick="openAbout()">אודות</button>
+    </nav>
+
+    <div class="container">
+        <!-- כותרת ופסקה במרכז הדף -->
+        <div class="welcome-section">
+            <h2>ברוך הבא לאתר הזכויות עבור עולים חדשים</h2>
+            <p>באתר זה תוכלו להתעניין בנושאים שונים הנוגעים לעולים חדשים, ליצור קשר עם עורך דין ולצפות בביקורות ממבקרי האתר על העורכי דין שלנו</p>
+        </div>
+        <div class="button-container">
+            <button onclick="openForum()">פורום שאלות</button>
+            <button onclick="openLogin()">התחברות</button>
+            <button onclick="openLawyer()">עורך דין</button>
+            <button onclick="openReviews()">ביקורות</button>
+        </div>
+    </div>
+    <script>
+        function openForum() {
+            window.location.href = "forum.html";
+        }
+        function openLogin() {
+            window.location.href = "login.html";
+        }
+        function openLawyer() {
+            window.location.href = "";
+        }
+        function openReviews() {
+            window.location.href = "review.html";
+        }
+
+        function openPersonalArea() {
+            window.location.href = "login.html";
+        }
+
+        function openTaxes() {
+            window.location.href = "";
+        }
+
+        function openHousing() {
+            window.location.href = "";
+        }
+
+        function openEmployment() {
+            window.location.href = "תעסוקה.html";
+        }
+
+        function openGrant() {
+            window.location.href = "";
+        }
+
+        function openReviews() {
+            window.location.href = "revieW.html";
+        }
+
+        function openContact() {
+            window.location.href = "";
+        }
+
+        function openAbout() {
+            window.location.href = "";
+        }
+    </script>
+    <footer>
+        <p>כל הזכויות שמורות © 2024</p>
+    </footer>
+</body>
+
+</html>
