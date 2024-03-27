@@ -23,19 +23,46 @@
     </nav>
 
     <div class="container">
-        <!-- כותרת ופסקה במרכז הדף -->
         <div class="welcome-section">
             <h2>ברוך הבא לאתר הזכויות עבור עולים חדשים</h2>
             <p>באתר זה תוכלו להתעניין בנושאים שונים הנוגעים לעולים חדשים, ליצור קשר עם עורך דין ולצפות בביקורות ממבקרי האתר על העורכי דין שלנו</p>
         </div>
         <div class="button-container">
             <button onclick="openForum()">פורום שאלות</button>
-            <button onclick="openLogin()">התחברות</button>
+            <button id="loginLogoutButton" onclick="handleLoginLogout()" style="display: none;">התחברות/הרשמה</button>
             <button onclick="openLawyer()">עורך דין</button>
             <button onclick="openReviews()">ביקורות</button>
         </div>
     </div>
     <script>
+            function checkIfUserLoggedIn() {
+        return localStorage.getItem('userData') !== null;
+    }
+
+    function handleLoginLogout() {
+        if (checkIfUserLoggedIn()) {
+            localStorage.removeItem('userData');
+            alert('התנתקת בהצלחה');
+            document.getElementById('loginLogoutButton').innerText = 'התחברות/הרשמה';
+            window.location.href = 'homepage.html'; 
+        } else {
+            window.location.href = 'login.html'; 
+        }
+    }
+
+    function updateLoginLogoutButton() {
+        const button = document.getElementById('loginLogoutButton');
+        if (checkIfUserLoggedIn()) {
+            button.style.display = 'block';
+            button.innerText = 'התנתקות';
+        } else {
+            button.style.display = 'block';
+            button.innerText = 'התחברות/הרשמה';
+        }
+    }
+
+document.addEventListener('DOMContentLoaded', updateLoginLogoutButton);
+
         function openForum() {
             window.location.href = "forum.html";
         }
@@ -82,7 +109,7 @@
         }
     </script>
     <footer>
-        <p>כל הזכויות שמורות © 2024</p>
+        <p>כל הזכויות שמורות © 2024 לקבוצה 25 </p>
     </footer>
 </body>
 
