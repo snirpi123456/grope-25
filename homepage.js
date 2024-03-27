@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     updateLoginLogoutButton();
     document.getElementById('personalAreaButton').addEventListener('click', redirectToPersonalAreaOrLogin);
 });
@@ -48,7 +48,21 @@ function redirectToPersonalAreaOrLogin() {
         window.location.href = 'login.html';
     }
 }
+function openTaxes() {
+    window.location.href = "tax.html";
+}
 
+function openHousing() {
+    window.location.href = "שיכון.html";
+}
+
+function openEmployment() {
+    window.location.href = "תעסוקה.html";
+}
+
+function openGrant() {
+    window.location.href = "מלגה.html";
+}
 // פונקציות להפניות לעמודים שונים
 function openForum() {
     window.location.href = "forum.html";
@@ -58,6 +72,4 @@ function openReviews() {
     window.location.href = "review.html";
 }
 
-function openEmployment() {
-    window.location.href = "תעסוקה.html";
-}
+
