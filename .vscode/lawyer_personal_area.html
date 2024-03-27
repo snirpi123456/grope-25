@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פרופיל</title>
+<style>
+     body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: #49124e;
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #49124e;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    textarea {
+        height: 100px;
+    }
+    input[type="file"] {
+        margin-bottom: 20px;
+    }
+    button[type="submit"] {
+        background-color: #49124e;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button[type="submit"]:hover {
+        background-color: #3b0d3d;
+    }
+
+</style>
+</head>
+<body dir="rtl">
+    <div id="profile" style="display: none;">
+        <!-- Profile details will be displayed here -->
+    </div>
+
+    <div id="login">
+        <!-- Login form will be displayed here -->
+    </div>
+
+    <script>
+        // Function to display the profile page
+        function displayProfile(profileData) {
+            const profileDiv = document.getElementById("profile");
+            profileDiv.style.display = "block";
+            profileDiv.innerHTML = `
+                <h1>פרופיל</h1>
+                <p><strong>שם:</strong> ${profileData.name}</p>
+                <p><strong>אימייל:</strong> ${profileData.email}</p>
+                <p><strong>התמחות:</strong> ${profileData.specialty}</p>
+                <p><strong>ביוגרפיה:</strong> ${profileData.bio}</p>
+                <p><strong>לינק לאתר אישי:</strong> ${profileData.link}</p>
+                <button onclick="editProfile()">ערוך פרופיל</button>
+            `;
+        }
+
+        // Function to display the edit profile form
+        function editProfile() {
+            const profileDiv = document.getElementById("profile");
+            profileDiv.innerHTML = `
+                <h1>עריכת פרופיל</h1>
+                <form id="editProfileForm">
+                    <label for="name">שם:</label>
+                    <input type="text" id="name" required><br>
+                    <label for="email">אימייל:</label>
+                    <input type="email" id="email" required><br>
+                    <label for="specialty">התמחות:</label>
+                    <input type="text" id="specialty" required><br>
+                    <label for="bio">ביוגרפיה:</label>
+                    <textarea id="bio" rows="4" required></textarea><br>
+                    <label for="link">לינק לאתר אישי:</label>
+                    <input type="text" id="link"><br>
+                    <button type="submit">שמור</button>
+                </form>
+            `;
+            // Fill form fields with existing profile data
+            const profileData = JSON.parse(localStorage.getItem("profile"));
+            document.getElementById("name").value = profileData.name;
+            document.getElementById("email").value = profileData.email;
+            document.getElementById("specialty").value = profileData.specialty;
+            document.getElementById("bio").value = profileData.bio;
+            document.getElementById("link").value = profileData.link;
+
+            // Handle form submission
+            document.getElementById("editProfileForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                // Save updated profile data to local storage
+                const updatedProfile = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    specialty: document.getElementById("specialty").value,
+                    bio: document.getElementById("bio").value,
+                    link: document.getElementById("link").value
+                };
+                localStorage.setItem("profile", JSON.stringify(updatedProfile));
+                // Display updated profile
+                displayProfile(updatedProfile);
+            });
+        }
+
+        // Check if user is logged in
+        const isLoggedIn = true; // Replace with your login logic
+        if (isLoggedIn) {
+            // Display profile if logged in
+            const profileData = JSON.parse(localStorage.getItem("profile"));
+            if (profileData) {
+                displayProfile(profileData);
+            } else {
+                // If profile data doesn't exist, prompt user to create a profile
+                editProfile();
+            }
+        } else {
+            // Display login form if not logged in
+            document.getElementById("login").innerHTML = `
+                <h1>התחברות</h1>
+                <!-- Login form goes here -->
+            `;
+        }
+    </script>
+</body>
+</html>
