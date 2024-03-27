@@ -13,7 +13,7 @@
         <h1>Right to be & Right to know</h1>
     </header>
     <nav>
-        <button onclick="openPersonalArea()">איזור אישי</button>
+        <button id="personalAreaButton">אזור אישי</button>
         <button onclick="openTaxes()">מיסים</button>
         <button onclick="openHousing()">שיכון</button>
         <button onclick="openEmployment()">תעסוקה</button>
@@ -34,80 +34,7 @@
             <button onclick="openReviews()">ביקורות</button>
         </div>
     </div>
-    <script>
-            function checkIfUserLoggedIn() {
-        return localStorage.getItem('userData') !== null;
-    }
-
-    function handleLoginLogout() {
-        if (checkIfUserLoggedIn()) {
-            localStorage.removeItem('userData');
-            alert('התנתקת בהצלחה');
-            document.getElementById('loginLogoutButton').innerText = 'התחברות/הרשמה';
-            window.location.href = 'homepage.html'; 
-        } else {
-            window.location.href = 'login.html'; 
-        }
-    }
-
-    function updateLoginLogoutButton() {
-        const button = document.getElementById('loginLogoutButton');
-        if (checkIfUserLoggedIn()) {
-            button.style.display = 'block';
-            button.innerText = 'התנתקות';
-        } else {
-            button.style.display = 'block';
-            button.innerText = 'התחברות/הרשמה';
-        }
-    }
-
-document.addEventListener('DOMContentLoaded', updateLoginLogoutButton);
-
-        function openForum() {
-            window.location.href = "forum.html";
-        }
-        function openLogin() {
-            window.location.href = "login.html";
-        }
-        function openLawyer() {
-            window.location.href = "";
-        }
-        function openReviews() {
-            window.location.href = "review.html";
-        }
-
-        function openPersonalArea() {
-            window.location.href = "login.html";
-        }
-
-        function openTaxes() {
-            window.location.href = "";
-        }
-
-        function openHousing() {
-            window.location.href = "";
-        }
-
-        function openEmployment() {
-            window.location.href = "תעסוקה.html";
-        }
-
-        function openGrant() {
-            window.location.href = "";
-        }
-
-        function openReviews() {
-            window.location.href = "revieW.html";
-        }
-
-        function openContact() {
-            window.location.href = "";
-        }
-
-        function openAbout() {
-            window.location.href = "";
-        }
-    </script>
+    <script src="homepage.js"></script>
     <footer>
         <p>כל הזכויות שמורות © 2024 לקבוצה 25 </p>
     </footer>
