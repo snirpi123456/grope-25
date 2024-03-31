@@ -4,7 +4,6 @@ const { submitReview, saveReview, clearForm, displayReviews, getStars } = requir
 const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
 global.document = dom.window.document;
 
-// test that the review form submits properly
 test('review form submission', () => {
   const reviewText = 'This product is great!';
   submitReviewForm(reviewText);
@@ -13,7 +12,6 @@ test('review form submission', () => {
   expect(latestReview.text).toBe(reviewText);
 });
 
-// test that reviews are displayed properly
 test('review display', () => {
   const review1 = createReview('Love this product!'); 
   const review2 = createReview('Does not work for me');
@@ -24,8 +22,6 @@ test('review display', () => {
   expect(displayedReviews).toEqual([review1, review2]);
 });
 
-// test that stars are marked properly
-// Select the 5 star radio inputs
 const star1 = document.querySelector('input[name="rating"][value="1"]');
 const star2 = document.querySelector('input[name="rating"][value="2"]');
 const star3 = document.querySelector('input[name="rating"][value="3"]');
