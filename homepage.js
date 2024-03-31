@@ -43,7 +43,7 @@ function handleLoginLogout() {
 // פונקציה להפניה לאזור האישי או לעמוד התחברות בהתאם למצב המשתמש
 function redirectToPersonalAreaOrLogin() {
     if (checkIfUserLoggedIn()) {
-        window.location.href = 'lawyer_profile.html';
+        window.location.href = 'lawyer_personal_area.html';
     } else {
         window.location.href = 'login.html';
     }
@@ -74,4 +74,8 @@ function openReviews() {
 
 function openAbout() {
     window.location.href = "אודות.html";
+}
+
+function openLawyer() {
+    window.location.href = "פרופיל עורכי דין.html";
 }

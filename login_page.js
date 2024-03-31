@@ -45,7 +45,7 @@ function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
 
-    if(enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
+    if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
         alert('התחברת בהצלחה כאדמין!');
         window.location.href = 'homePage.html';
         return;
