@@ -1,13 +1,12 @@
-/* style.css */
 
 body {
     font-family: Arial, sans-serif;
-    direction: rtl; /* כיוון טקסט מימין לשמאל */
+    direction: rtl; 
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* ממרכז את התוכן */
+    align-items: center; 
 }
 
 header {
@@ -74,19 +73,18 @@ footer {
     bottom: 0;
 }
 
-/* סגנון נוסף עבור הכותרת והפסקה במרכז הדף */
 .welcome-section {
     text-align: center;
-    margin-bottom: 40px; /* כדי ליצור מרווח בין הכותרת והפסקה לבאים אחרי */
+    margin-bottom: 40px; 
 }
 
 .welcome-section h2 {
     font-size: 24px;
     color: #49124e;
-    margin-bottom: 10px; /* מרווח בין הכותרת לפסקה */
-}
+    margin-bottom: 10px; 
 
 .welcome-section p {
     font-size: 18px;
     color: #333;
+}
 }
