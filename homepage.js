@@ -72,4 +72,6 @@ function openReviews() {
     window.location.href = "review.html";
 }
 
-
+function openAbout() {
+    window.location.href = "אודות.html";
+}
