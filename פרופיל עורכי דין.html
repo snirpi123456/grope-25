@@ -52,30 +52,33 @@
     </style>
 </head>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Update Example</title>
+</head>
+
 <body>
-    <div class="container">
-        <h1>פרופיל עו"ד</h1>
-        <div id="profileDetails">
-            <!-- Display user profile details here -->
-        </div>
+
+    <div id="">
+        זוהי תוכן מקורי שיש לעדכן
+    </div>
+
+    <div id="פרופיל עורכי דין.html">
+        זוהי תוכן שיתעדכן בהתאם לתוכן המקורי
     </div>
 
     <script>
-        // Retrieve user data from localStorage
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        // קביעת משתנה עבור האלמנט שבו נרצה להציג את התוכן המעודכן
+        const targetElement = document.getElementById('targetContent');
 
-        // Display user profile details
-        const profileDetailsContainer = document.getElementById('profileDetails');
-        profileDetailsContainer.innerHTML = `
-            <p>שם: ${userData.name}</p>
-            <p>אימייל: ${userData.email}</p>
-            <p>סוג משתמש: עו"ד</p>
-        `;
+        // שליפת תוכן מהאלמנט המקורי
+        const sourceContent = document.getElementById('sourceContent').innerText;
 
-        function redirectToEditProfile() {
-            window.location.href = 'lawyer_personal_area.html'; // Link to the profile editing page
-        }
+        // עדכון תוכן האלמנט המטרה עם התוכן ששלבנו
+        targetElement.innerText = sourceContent;
     </script>
+
 </body>
 
 </html>
