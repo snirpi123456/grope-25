@@ -24,7 +24,7 @@ function updateLoginLogoutButton() {
 
 function redirectToPersonalAreaOrLogin() {
     if (checkIfUserLoggedIn()) {
-        window.location.href = 'lawyer_personal_area.html';
+        window.location.href = 'lawyer_profile.html';
     } else {
         window.location.href = 'login.html';
     }
