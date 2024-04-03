@@ -45,25 +45,23 @@ function authenticateUser() {
 
     if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
         alert('התחברת בהצלחה כאדמין!');
-        localStorage.setItem('currentUser', JSON.stringify({ email: enteredEmail, role: 'admin', isAuthenticated: true }));
-        window.location.href = 'homePage.html'; 
+        localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
+        window.location.href = 'homePage.html';
         return;
+    }else{
+        alert('שם משתמש או סיסמא שגויים ')
     }
-    
-    const users = JSON.parse(localStorage.getItem('userData')) || [];
-    const user = users.find(user => user.email === enteredEmail && user.password === enteredPassword);
 
-    if (userData.email === enteredEmail && userData.password === enteredPassword)  {
-        localStorage.setItem('currentUser', JSON.stringify({ ...user, isAuthenticated: true }));
-        if (user.role === 'lawyer') {
-            alert('התחברת בהצלחה כעורך דין!');
-            window.location.href = 'homePage.html';
-        } else {
-            alert('התחברת בהצלחה כמשתמש רגיל!');
-            window.location.href = 'homePage.html'; 
-        }
-    } else {
-        alert('כתובת האימייל או הסיסמה שגויים. אנא נסה שנית.');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    if (userData.email === enteredEmail && userData.password === enteredPassword) {
+        alert('התחברת בהצלחה!');
+        window.location.href = 'homePage.html';
+
+        localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
+        window.location.href = 'homePage.html';
+    }else{
+        alert('שם משתמש או סיסמא שגויים ')
     }
     
 }
