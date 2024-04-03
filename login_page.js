@@ -53,7 +53,7 @@ function authenticateUser() {
     const users = JSON.parse(localStorage.getItem('userData')) || [];
     const user = users.find(user => user.email === enteredEmail && user.password === enteredPassword);
 
-    if (user) {
+    if (userData.email === enteredEmail && userData.password === enteredPassword)  {
         localStorage.setItem('currentUser', JSON.stringify({ ...user, isAuthenticated: true }));
         if (user.role === 'lawyer') {
             alert('התחברת בהצלחה כעורך דין!');
@@ -65,6 +65,7 @@ function authenticateUser() {
     } else {
         alert('כתובת האימייל או הסיסמה שגויים. אנא נסה שנית.');
     }
+    
 }
 
 document.getElementById('registerButton').addEventListener('click', saveUserData);
