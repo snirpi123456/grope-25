@@ -1,0 +1,65 @@
+body {
+    direction: rtl; /* כיוון טקסט מימין לשמאל */
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #49124e; /* צבע הכותרת */
+}
+
+#usersList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#usersList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#usersList li button {
+    padding: 5px 10px;
+    background-color: #49124e; /* שינוי צבע כפתור המחיקה */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#usersList li button:hover {
+    background-color: #3a0e3a; /* גוון כהה יותר להובר */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #49124e;
+    color: white;
+}
+
+button {
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c9302c;
+}
