@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול לינקים לאתרים אישיים</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            direction: rtl;
+        }
+
+        h1 {
+            color: #49124e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-item {
+            margin-bottom: 10px;
+        }
+
+        .link-item button {
+            background-color: #49124e;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .link-item button:hover {
+            background-color: #3b0d3d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ניהול לינקים לאתרים אישיים</h1>
+        <ul class="link-list" id="linkList">
+         
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayLinks();
+        });
+
+        function displayLinks() {
+            const linkList = document.getElementById('linkList');
+            linkList.innerHTML = ''; 
+            const links = document.querySelectorAll('a');
+
+            links.forEach(link => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('link-item');
+
+                const linkText = document.createTextNode(link.textContent);
+                listItem.appendChild(linkText);
+
+                const approveButton = document.createElement('button');
+                approveButton.textContent = 'אישור';
+                approveButton.addEventListener('click', function() {
+                    approveLink(link.href);
+                });
+
+                listItem.appendChild(approveButton);
+
+                linkList.appendChild(listItem);
+            });
+        }
+
+        function approveLink(link) {
+            alert('לינק מאושר: ' + link);
+        }
+    </script>
+</body>
+</html>
