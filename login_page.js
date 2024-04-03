@@ -41,21 +41,16 @@ function saveUserData() {
 }
 
 
+document.getElementById('loginButton').addEventListener('click', authenticateUser);
+
 function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
 
     if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
         alert('התחברת בהצלחה כאדמין!');
-        window.location.href = 'homePage.html';
-        return;
-    }
-
-    const userData = JSON.parse(localStorage.getItem('userData'));
-
-    if (userData.email === enteredEmail && userData.password === enteredPassword) {
-        alert('התחברת בהצלחה!');
-        window.location.href = 'homePage.html';
+        localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
+        window.location.href = 'homePage.html'; // דף הניהול של האדמין
     } else {
         alert('כתובת האימייל או הסיסמה שגויים');
     }

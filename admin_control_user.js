@@ -10,15 +10,19 @@ function addSampleUsersToLocalStorage() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (!isUserAdmin()) {
+    if (isUserAdmin()) {
+        document.getElementById('adminContent').textContent = 'ברוך הבא לניהול המשתמשים!';
+        // כאן יכול להיות קוד נוסף לטעינת והצגת רשימת המשתמשים, כמו שהוצג בדוגמאות הקודמות
+    } else {
         alert('אינך מורשה לגשת לעמוד זה!');
-        window.location.href = 'homepage.html'; // הפנייה לדף הבית או לדף התחברות
-        return;
+        window.location.href = 'homePage.html'; // הפנייה חזרה לדף ההתחברות
     }
-    
-    addSampleUsersToLocalStorage(); // הוספת משתמשים לדוגמה, אפשר להסיר לאחר בדיקה
-    loadUsers();
 });
+
+function isUserAdmin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    return userData && userData.isAuthenticated && userData.role === 'admin';
+}
 
 function isUserAdmin() {
     const userData = JSON.parse(localStorage.getItem('userData'));
