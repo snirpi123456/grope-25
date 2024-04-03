@@ -43,11 +43,10 @@ function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
 
-    // בדיקה אם המשתמש הוא אדמין
     if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
         alert('התחברת בהצלחה כאדמין!');
         localStorage.setItem('currentUser', JSON.stringify({ email: enteredEmail, role: 'admin', isAuthenticated: true }));
-        window.location.href = 'adminHomePage.html'; // העבר לדף הבית של האדמין
+        window.location.href = 'homePage.html'; 
         return;
     }
     
@@ -58,10 +57,10 @@ function authenticateUser() {
         localStorage.setItem('currentUser', JSON.stringify({ ...user, isAuthenticated: true }));
         if (user.role === 'lawyer') {
             alert('התחברת בהצלחה כעורך דין!');
-            window.location.href = 'lawyerHomePage.html'; // העבר לדף הבית של עורך הדין
+            window.location.href = 'homePage.html';
         } else {
             alert('התחברת בהצלחה כמשתמש רגיל!');
-            window.location.href = 'userHomePage.html'; // העבר לדף הבית של המשתמש הרגיל
+            window.location.href = 'homePage.html'; 
         }
     } else {
         alert('כתובת האימייל או הסיסמה שגויים. אנא נסה שנית.');
