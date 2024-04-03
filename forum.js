@@ -108,3 +108,65 @@ function showQuestions(category) {
 
 showCategories();
 
+document.querySelectorAll('.replyBtn').forEach(function(button) {
+    button.addEventListener('click', handleReply);
+});
+
+function handleReply(event) {
+    const questionElement = event.target.parentNode;
+    const replyInput = document.createElement('textarea');
+    replyInput.classList.add('replyInput');
+    const submitReplyBtn = document.createElement('button');
+    submitReplyBtn.textContent = 'שלח תשובה';
+    submitReplyBtn.classList.add('submitReplyBtn');
+
+    submitReplyBtn.addEventListener('click', function() {
+        const reply = replyInput.value.trim();
+        if (reply !== '') {
+            const replyText = document.createElement('div');
+            replyText.textContent = 'תשובה: ' + reply;
+            questionElement.appendChild(replyText);
+
+            // Save the reply to local storage
+            saveReplyToLocalStorage(reply, questionElement); // Pass the question element as an argument
+
+            replyInput.value = '';
+
+            const category = questionElement.getAttribute('data-category');
+            showQuestions(category);
+        } else {
+            alert('נא להזין תשובה לפני השליחה.');
+        }
+    });
+
+    questionElement.appendChild(replyInput);
+    questionElement.appendChild(submitReplyBtn);
+}
+
+// Function to save the reply to local storage
+function saveReplyToLocalStorage(reply, questionElement) {
+    // Get the index of the question in the questions list
+    const index = Array.from(questionElement.parentNode.children).indexOf(questionElement);
+    // Create a unique key for the reply based on the question index
+    const key = 'reply_' + index;
+    let replies = JSON.parse(localStorage.getItem('replies')) || {};
+    replies[key] = reply;
+    localStorage.setItem('replies', JSON.stringify(replies));
+}
+
+function displayRepliesFromLocalStorage(questionElement) {
+    const index = Array.from(questionElement.parentNode.children).indexOf(questionElement);
+    const key = 'reply_' + index;
+    const replies = JSON.parse(localStorage.getItem('replies')) || {};
+    const reply = replies[key];
+    if (reply) {
+        const replyElement = document.createElement('div');
+        replyElement.textContent = 'תשובה: ' + reply;
+        questionElement.appendChild(replyElement);
+    }
+}
+
+document.querySelectorAll('.question').forEach(function(question) {
+    displayRepliesFromLocalStorage(question);
+    
+});

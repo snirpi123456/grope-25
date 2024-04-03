@@ -47,14 +47,28 @@ function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
 
-    if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
-        alert('התחברת בהצלחה כאדמין!');
-        localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
-        window.location.href = 'homePage.html'; // דף הניהול של האדמין
+    if (enteredEmail === adminUser.email) {
+        if (enteredPassword === adminUser.password) {
+            alert('התחברת בהצלחה כאדמין!');
+            localStorage.setItem('currentUser', JSON.stringify({ ...adminUser, isAuthenticated: true }));
+            window.location.href = 'homePage.html'; 
+            return;
+        } else {
+            alert('ניסיון התחברות כאדמין נכשלה');
+            return;
+        }
+    }
+
+    const users = JSON.parse(localStorage.getItem('userData')) || [];
+    const user = users.find(user => user.email === enteredEmail && user.password === enteredPassword);
+
+    if (user) {
+        alert(`התחברת בהצלחה כ${user.userType === 'lawyer' ? 'עורך דין' : 'משתמש רגיל'}!`);
+        localStorage.setItem('currentUser', JSON.stringify({ ...user, isAuthenticated: true }));
+        window.location.href = 'homePage.html'; 
     } else {
         alert('כתובת האימייל או הסיסמה שגויים');
     }
 }
-
 document.getElementById('registerButton').addEventListener('click', saveUserData);
 document.getElementById('loginButton').addEventListener('click', authenticateUser);
