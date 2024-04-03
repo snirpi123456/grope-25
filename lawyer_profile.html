@@ -97,9 +97,10 @@
                 bioParagraph.textContent = 'ביוגרפיה: ' + userData.bio;
                 profileDetails.appendChild(bioParagraph);
 
-                const linkParagraph = document.createElement('p');
-                linkParagraph.textContent = 'לינק לאתר אישי: ' + userData.link;
-                profileDetails.appendChild(linkParagraph);
+                const linkAnchor = document.createElement('a');
+                linkAnchor.textContent = 'לינק לאתר אישי';
+                linkAnchor.href = userData.link;
+                profileDetails.appendChild(linkAnchor);
             }
         });
         function redirectToEditProfile() {
