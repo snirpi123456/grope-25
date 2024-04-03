@@ -56,7 +56,11 @@ function openGrant() {
     window.location.href = "מלגה.html";
 }
 function openForum() {
-    window.location.href = "forum.html";
+    if (checkIfUserLoggedIn()) {
+        window.location.href = "forum.html";
+    } else {
+        window.location.href = "login.html";
+    }
 }
 
 function openReviews() {
@@ -70,3 +74,19 @@ function openAbout() {
 function openLawyer() {
     window.location.href = "פרופיל עורכי דין.html";
 }
+function adminControl() {
+    window.location.href = "admin_control_user.html";
+}
+
+var isAdmin = true;
+
+window.onload = function () {
+    var adminButton = document.getElementById("adminButton");
+
+    if (isAdmin) {
+        adminButton.style.display = "block";
+    } else {
+        adminButton.style.display = "none";
+    };
+}
+

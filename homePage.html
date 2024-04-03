@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> R&R </title>
     <link rel="stylesheet" href="pj_style.css">
+    <style>
+        /* עיצוב כפתורים */
+        button {
+            font-family: inherit;
+            font-size: inherit;
+            background-color: inherit;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
+        /* עיצוב כפתור בקרת אדמין */
+        #adminButton {
+            float: left;
+            margin-right: 10px;
+        }
+
+        /* עיצוב כפתור התחברות */
+        #loginLogoutButton {
+            float: left;
+            margin-right: 10px;
+            font-family: inherit;
+            font-size: inherit;
+            background-color: inherit;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,6 +45,9 @@
     </header>
     <nav>
         <button id="personalAreaButton">אזור אישי</button>
+        <!-- כפתור התחברות/הרשמה -->
+        <button id="loginLogoutButton" onclick="handleLoginLogout()" style="display: none;">התחברות/הרשמה</button>
+        <button id="adminButton" onclick="adminControl()" style="display:none;">בקרת אדמין</button>
         <button onclick="openTaxes()">מיסים</button>
         <button onclick="openHousing()">שיכון</button>
         <button onclick="openEmployment()">תעסוקה</button>
@@ -29,7 +63,6 @@
         </div>
         <div class="button-container">
             <button onclick="openForum()">פורום שאלות</button>
-            <button id="loginLogoutButton" onclick="handleLoginLogout()" style="display: none;">התחברות/הרשמה</button>
             <button onclick="openLawyer()">עורך דין</button>
             <button onclick="openReviews()">ביקורות</button>
         </div>
