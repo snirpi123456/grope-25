@@ -90,6 +90,9 @@
             
             <label for="bio">ביוגרפיה:</label>
             <textarea id="bio" rows="4" required></textarea>
+
+            <label for="languages">שפות:</label>
+            <input type="text" id="specialty" required>
             
             <label for="link">לינק לאתר אישי:</label>
             <input type="text" id="link">
@@ -110,10 +113,11 @@
     const email = document.getElementById('email').value;
     const specialty = document.getElementById('specialty').value;
     const bio = document.getElementById('bio').value;
+    const languages = document.getElementById('languages').value;
     const link = document.getElementById('link').value;
 
     
-    const userData = { name, email, specialty, bio, link };
+    const userData = { name, email, specialty, bio, languages, link };
 
         localStorage.setItem('userData', JSON.stringify(userData));
 

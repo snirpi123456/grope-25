@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול ביקורות</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            direction: rtl;
+        }
+
+        h1 {
+            color: #49124e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .review-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .review-content {
+            margin-bottom: 10px;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ניהול ביקורות</h1>
+        <ul class="review-list" id="reviewList">
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayReviews();
+        });
+
+        function displayReviews() {
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = '';
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+
+            if (reviews) {
+                reviews.forEach((review, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('review-item');
+
+                    const reviewContent = document.createElement('p');
+                    reviewContent.classList.add('review-content');
+                    reviewContent.textContent = review;
+                    listItem.appendChild(reviewContent);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'מחק ביקורת';
+                    deleteButton.classList.add('delete-button');
+                    deleteButton.addEventListener('click', function() {
+                        deleteReview(index);
+                    });
+                    listItem.appendChild(deleteButton);
+
+                    reviewList.appendChild(listItem);
+                });
+            }
+        }
+
+        function deleteReview(index) {
+            let reviews = JSON.parse(localStorage.getItem('reviews'));
+
+            reviews.splice(index, 1);
+
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+
+            displayReviews();
+        }
+    </script>
+</body>
+</html>

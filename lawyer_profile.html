@@ -97,6 +97,10 @@
                 bioParagraph.textContent = 'ביוגרפיה: ' + userData.bio;
                 profileDetails.appendChild(bioParagraph);
 
+                const languagesParagraph = document.createElement('p');
+                languagesParagraph.textContent = 'שפות: ' + userData.languages;
+                profileDetails.appendChild(languagesParagraph);
+
                 const linkAnchor = document.createElement('a');
                 linkAnchor.textContent = 'לינק לאתר אישי';
                 linkAnchor.href = userData.link;
