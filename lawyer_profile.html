@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פרופיל עו"ד</title>
+    <title>פרופיל עורך דין</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,7 +11,7 @@
             color: #333;
             margin: 0;
             padding: 0;
-            text-align: center;
+            text-align: right;
         }
 
         .container {
@@ -42,33 +42,68 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            display: block;
+            margin: 0 auto; 
         }
 
         button:hover {
             background-color: #3b0d3d;
         }
+
+        .profile-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>פרופיל עו"ד</h1>
+        <h1>פרופיל עורך דין</h1>
         <div id="profileDetails">
         </div>
-        <button onclick="redirectToEditProfile()">ערוך פרופיל</button>
+    </div>
+    <button onclick="redirectToEditProfile()">ערוך פרופיל</button>
+</div>
     </div>
 
     <script>
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
 
-        const profileDetailsContainer = document.getElementById('profileDetails');
-        profileDetailsContainer.innerHTML = `
-            <p>שם: ${userData.name}</p>
-            <p>אימייל: ${userData.email}</p>
-            <p>סוג משתמש: עו"ד</p>
-        `;
+            if (userData) {
+                const profileDetails = document.getElementById('profileDetails');
 
+                const nameParagraph = document.createElement('p');
+                nameParagraph.textContent = 'שם: ' + userData.name;
+                profileDetails.appendChild(nameParagraph);
+
+                const emailParagraph = document.createElement('p');
+                emailParagraph.textContent = 'אימייל: ' + userData.email;
+                profileDetails.appendChild(emailParagraph);
+
+                const specialtyParagraph = document.createElement('p');
+                specialtyParagraph.textContent = 'התמחות: ' + userData.specialty;
+                profileDetails.appendChild(specialtyParagraph);
+
+                const bioParagraph = document.createElement('p');
+                bioParagraph.textContent = 'ביוגרפיה: ' + userData.bio;
+                profileDetails.appendChild(bioParagraph);
+
+                const linkParagraph = document.createElement('p');
+                linkParagraph.textContent = 'לינק לאתר אישי: ' + userData.link;
+                profileDetails.appendChild(linkParagraph);
+            }
+        });
         function redirectToEditProfile() {
-            window.location.href = 'lawyer_personal_area.html'; 
+            window.location.href = 'lawyer_personal_area.html'; // Link to the profile editing page
         }
     </script>
 </body>

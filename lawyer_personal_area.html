@@ -66,6 +66,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            margin: 0 auto;
         }
 
         button[type="submit"]:hover {
@@ -76,9 +77,7 @@
 <body>
     <div class="container">
         <h1>עריכת פרופיל</h1>
-        <form id="profileForm">
-            <label for="profilePicture">תמונת פרופיל:</label>
-            <input type="file" id="profilePicture" accept="image/*">
+        <form id="profileForm" onsubmit="saveProfile(event)">
             
             <label for="name">שם:</label>
             <input type="text" id="name" required>
@@ -102,50 +101,25 @@
         </form>
     </div>
 
-
     <script>
-        function saveProfile() {
-            // Get form inputs
-            const profilePicture = document.getElementById('profilePicture').files[0];
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const specialty = document.getElementById('specialty').value;
-            const bio = document.getElementById('bio').value;
-            const attachments = document.getElementById('attachments').files;
+      function saveProfile(event) {
+    event.preventDefault(); 
 
-            // Example of further processing:
-            // You can handle the file upload (profile picture and attachments) using FormData and AJAX
-            
-            // Example AJAX call (using fetch)
-            const formData = new FormData();
-            formData.append('profilePicture', profilePicture);
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('specialty', specialty);
-            formData.append('bio', bio);
-            attachments.forEach(file => {
-                formData.append('attachments', file);
-            });
+   
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const specialty = document.getElementById('specialty').value;
+    const bio = document.getElementById('bio').value;
+    const link = document.getElementById('link').value;
 
-            fetch('save_profile.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert('Profile saved successfully!');
-                // Redirect or do something else after successful save
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                alert('There was an error saving the profile. Please try again later.');
-            });
-        }
+    
+    const userData = { name, email, specialty, bio, link };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+    
+    window.location.href = 'lawyer_profile.html';
+}
     </script>
 </body>
 </html>
