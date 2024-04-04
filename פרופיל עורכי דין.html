@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>פרופיל עו"ד</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,14 +21,14 @@
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #49124e;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             direction: rtl;
         }
 
         h1 {
-            color: #49124e;
+            color: #ffffff;
             margin-bottom: 30px;
         }
 
@@ -34,51 +36,64 @@
             margin-bottom: 10px;
         }
 
-        button {
-            background-color: #49124e;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #3b0d3d;
+        .profile {
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
     </style>
-</head>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Update Example</title>
 </head>
 
 <body>
     <div class="container">
         <h1>פרופיל עו"ד</h1>
         <div id="profileDetails">
-            <!-- Display user profile details here -->
+
         </div>
     </div>
 
     <script>
-        // Retrieve user data from localStorage
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const lawyers = [
+            {
+                name: "Ron Cohen",
+                email: "ron@walla.com",
+                role: "עו\"ד"
+            },
+            {
+                name: "Talia Cohen",
+                email: "talia@walla.com",
+                role: "עו\"ד"
+            },
+            {
+                name: "Idan Cohen",
+                email: "idan@walla.com",
+                role: "עו\"ד"
+            },
+            {
+                name: "מיה לוי",
+                email: "maya@gmail.com",
+                role: "עו\"ד",
+            }
+        ];
 
-        // Display user profile details
+
         const profileDetailsContainer = document.getElementById('profileDetails');
-        profileDetailsContainer.innerHTML = `
-            <p>שם: ${userData.name}</p>
-            <p>אימייל: ${userData.email}</p>
-            <p>סוג משתמש: עו"ד</p>
-        `;
+
+
+        lawyers.forEach(lawyer => {
+            const profileElement = document.createElement('div');
+            profileElement.classList.add('profile');
+            profileElement.innerHTML = `
+                <p>שם: ${lawyer.name}</p>
+                <p>אימייל: ${lawyer.email}</p>
+                <p>סוג משתמש: ${lawyer.role}</p>
+            `;
+            profileDetailsContainer.appendChild(profileElement);
+        });
 
         function redirectToEditProfile() {
-            window.location.href = 'lawyer_personal_area.html'; // Link to the profile editing page
+            window.location.href = 'lawyer_personal_area.html';
         }
     </script>
 

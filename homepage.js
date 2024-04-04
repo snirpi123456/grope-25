@@ -23,7 +23,7 @@ function checkIfUserLoggedIn() {
     return localStorage.getItem('userData') !== null;
 }
 
-function handleLoginLogout() {
+function handleLoginLogout() {//בדיקה אם מחובר או לא 
     if (checkIfUserLoggedIn()) {
         localStorage.removeItem('userData');
         alert('התנתקת בהצלחה');
@@ -33,29 +33,31 @@ function handleLoginLogout() {
     }
 }
 
-function redirectToPersonalAreaOrLogin() {
+function redirectToPersonalAreaOrLogin() {//מנהלת את הניתוב של המשתמש
     if (checkIfUserLoggedIn()) {
         window.location.href = 'lawyer_profile.html';
     } else {
         window.location.href = 'login.html';
     }
 }
-function openTaxes() {
+
+function openTaxes() {//הפניה לדף מיסים
     window.location.href = "tax.html";
 }
 
-function openHousing() {
+function openHousing() {//הפניה לדף שיכון
     window.location.href = "שיכון.html";
 }
 
-function openEmployment() {
+function openEmployment() {//הפניה לדף תעסוקה
     window.location.href = "תעסוקה.html";
 }
 
-function openGrant() {
+function openGrant() {//הפניה לדף מלגות
     window.location.href = "מלגה.html";
 }
-function openForum() {
+
+function openForum() {//הפניה לדף פורום
     if (checkIfUserLoggedIn()) {
         window.location.href = "forum.html";
     } else {
@@ -63,20 +65,23 @@ function openForum() {
     }
 }
 
-function openReviews() {
+function openReviews() {//הפניה לדף ביקורות
     window.location.href = "review.html";
 }
 
-function openAbout() {
+function openAbout() {//הפניה לדף אודות
     window.location.href = "אודות.html";
 }
 
-function openLawyer() {
+function openLawyer() {// הפניה לדף צפייה בעורכי דין
     window.location.href = "פרופיל עורכי דין.html";
 }
-function adminControl() {
+
+function adminControl() {//הפניה לדף בקרת אדמין
     window.location.href = "admin_control_user.html";
 }
+
+//
 
 var isAdmin = true;
 
@@ -89,4 +94,3 @@ window.onload = function () {
         adminButton.style.display = "none";
     };
 }
-
