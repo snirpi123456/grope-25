@@ -51,7 +51,20 @@ th {
     background-color: #49124e;
     color: white;
 }
+.buttons-container button {
+    background-color: #49124e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.buttons-container button:hover {
+    background-color: #3a0e39;
+}
 button {
     background-color: #d9534f;
     color: white;
@@ -63,3 +76,4 @@ button {
 button:hover {
     background-color: #c9302c;
 }
+
