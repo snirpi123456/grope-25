@@ -2,7 +2,20 @@ const btn2 = document.getElementById("btn2");
 const submitBtn = document.getElementById("submitBtn");
 
 btn2.addEventListener("click", function() {
-    document.getElementById("contactForm").style.display = "block";
+    // בדיקה האם המשתמש הוא משתמש מסוג "עורך דין"
+    const userDataString = localStorage.getItem('userData'); // או מנגנון אחר לקבלת מידע המשתמש
+    if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        const userType = userData.userType;
+        if (userType === 'regular') {
+            // פתיחת טופס הפניה
+            document.getElementById("contactForm").style.display = "block";
+        } else {
+            alert("אין לך הרשאה לפתוח טופס פניה.");
+        }
+    } else {
+        alert("יש להתחבר כדי לפתוח טופס פניה.");
+    }
 });
 
 submitBtn.addEventListener("click", function() {
@@ -24,6 +37,7 @@ submitBtn.addEventListener("click", function() {
     }
 
     let questionText = `קטגוריה: ${category}\nנושא: ${subject}\nשאלה: ${question}\n\n`;
+
 
     let existingQuestions = localStorage.getItem('questions') || '';
     existingQuestions += questionText;
@@ -130,18 +144,17 @@ function handleReply(event) {
 
     submitReplyBtn.addEventListener('click', function() {
         const reply = replyInput.value.trim();
-        const name = document.getElementById('name').value;
-        
-        // קריאה לשם הנכון של המשתנה userDataString
+        const userDataString = localStorage.getItem('userData');// משיכת מחרוזת המידע מהאחסון המקומי
+        const userData = JSON.parse(userDataString);
+        const username = userData.name;
         if (reply !== '') {
             const replyText = document.createElement('div');
-            replyText.textContent = '<' + name + '>'+ 'תשובה:'+ reply; // קריאה ל userDataString
+            replyText.textContent = `עורך דין < ${username} >\n\n תשובה: ${reply}\n`;
+            replyText.classList.add('reply-text');
             questionElement.appendChild(replyText);
 
             // Save the reply to local storage
             saveReplyToLocalStorage(reply, questionElement); // Pass the question element as an argument
-
-            replyInput.value = '';
 
             const category = questionElement.getAttribute('data-category');
             showQuestions(category);
@@ -149,9 +162,13 @@ function handleReply(event) {
             // Remove the reply input and submit button after sending the reply
             questionElement.removeChild(replyInput);
             questionElement.removeChild(submitReplyBtn);
+
+            // Clear the reply input
+            replyInput.value = '';
         } else {
             alert('נא להזין תשובה לפני השליחה.');
         }
+       
     });
 
     questionElement.appendChild(replyInput);
@@ -161,6 +178,7 @@ function handleReply(event) {
     questionElement.removeChild(event.target);
 }
 
+
 function displayRepliesFromLocalStorage(questionElement) {
 
     // אחזור מפתח התשובה בהתאם לאינדקס השאלה
@@ -169,15 +187,16 @@ function displayRepliesFromLocalStorage(questionElement) {
     const key = 'reply_' + index;
   
     // אחזור את האובייקט התשובות מהlocalStorage
-    const existingReplies = JSON.parse(localStorage.getItem('replies'));
+    const replies = JSON.parse(localStorage.getItem('replies'));
   
     // אחזור את התשובה לשאלה הנוכחית
-    const reply = existingReplies[key];
+    const reply = replies[key];
   
     // אם יש תשובה, הצג אותה 
     if (reply) {
-        const replyElement = document.createElement('div');
-        replyElement.textContent = reply;
-        questionElement.appendChild(replyElement);
+      const replyElement = document.createElement('div');
+      replyElement.textContent = reply;
+      questionElement.appendChild(replyElement);
     }
-}
+  
+  }

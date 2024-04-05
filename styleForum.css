@@ -107,7 +107,8 @@ button:hover {
     background-color: #e0e0e0;
 }
 
-.storageTitle {
-    color: #4E089B; 
-    font-weight: bold; 
+
+.reply-text {
+    color: #000000;
+    font-weight: bold;
 }
