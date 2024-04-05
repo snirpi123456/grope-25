@@ -112,3 +112,7 @@ button:hover {
     color: #000000;
     font-weight: bold;
 }
+
+.categoryItem.active {
+    background-color: #a964f3; 
+}

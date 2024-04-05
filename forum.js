@@ -51,6 +51,7 @@ submitBtn.addEventListener("click", function() {
     document.getElementById("contactForm").style.display = "none";
 
     alert("השאלה נשמרה בהצלחה!");
+    listItem.classList.add('active');
 
     showCategories();
 });
@@ -60,17 +61,29 @@ function showCategories() {
     
     const categoryList = document.getElementById("categoryList");
     categoryList.innerHTML = "";
-
+    let previousCategory = null
     categories.forEach(function(category) {
         const listItem = document.createElement("li");
         listItem.textContent = category;
         listItem.classList.add("categoryItem");
 
         listItem.addEventListener("click", function() {
+            
+            if (previousCategory) {
+                previousCategory.classList.remove('active');
+            }
+
+            // הוספת הסיווג 'active' לקטגוריה הנוכחית
+            listItem.classList.add('active');
+
+            // השמת הקטגוריה הנוכחית כקטגוריה קודמת
+            previousCategory = listItem;
             showQuestions(category);
         });
+        
 
         categoryList.appendChild(listItem);
+        
     });
 }
 
@@ -134,6 +147,14 @@ document.querySelectorAll('.replyBtn').forEach(function(button) {
     button.addEventListener('click', handleReply);
 });
 
+
+function saveReplyToLocalStorage(questionText, reply) {
+    const replies = JSON.parse(localStorage.getItem('replies')) || {};
+    const questionKey = 'question_' + questionText; // נוסיף את הטקסט של השאלה כמפתח
+    replies[questionKey] = reply; // שמירת התגובה עבור המפתח המתאים
+    localStorage.setItem('replies', JSON.stringify(replies));
+}
+
 function handleReply(event) {
     const questionElement = event.target.parentNode;
     const replyInput = document.createElement('textarea');
@@ -144,9 +165,10 @@ function handleReply(event) {
 
     submitReplyBtn.addEventListener('click', function() {
         const reply = replyInput.value.trim();
-        const userDataString = localStorage.getItem('userData');// משיכת מחרוזת המידע מהאחסון המקומי
+        const userDataString = localStorage.getItem('userData'); // משיכת מחרוזת המידע מהאחסון המקומי
         const userData = JSON.parse(userDataString);
         const username = userData.name;
+
         if (reply !== '') {
             const replyText = document.createElement('div');
             replyText.textContent = `עורך דין < ${username} >\n\n תשובה: ${reply}\n`;
@@ -154,11 +176,19 @@ function handleReply(event) {
             questionElement.appendChild(replyText);
 
             // Save the reply to local storage
-            saveReplyToLocalStorage(reply, questionElement); // Pass the question element as an argument
+            saveReplyToLocalStorage(reply, questionElement.getAttribute('data-index')); // Pass the question element's index as an argument
 
             const category = questionElement.getAttribute('data-category');
             showQuestions(category);
-            
+
+            // Add the answer to the question
+            addAnswer(questionElement, reply);
+
+            // Display user's question
+            const userQuestion = document.getElementById('questionInput').value;
+            const questionContainer = document.querySelector('.question[data-index="1"] .userQuestion');
+            questionContainer.textContent = userQuestion;
+
             // Remove the reply input and submit button after sending the reply
             questionElement.removeChild(replyInput);
             questionElement.removeChild(submitReplyBtn);
@@ -168,7 +198,6 @@ function handleReply(event) {
         } else {
             alert('נא להזין תשובה לפני השליחה.');
         }
-       
     });
 
     questionElement.appendChild(replyInput);
@@ -178,25 +207,21 @@ function handleReply(event) {
     questionElement.removeChild(event.target);
 }
 
+// Function to add an answer to a question item
+function addAnswer(questionItem, answerText) {
+    const answersDiv = questionItem.querySelector('.answers');
+    const answerElement = document.createElement('div');
+    answerElement.classList.add('answer');
+    answerElement.textContent = answerText;
+    answersDiv.appendChild(answerElement);
+    const questionText = questionItem.querySelector('p').textContent;
+    saveAnswerToLocalStorage(questionText, answerText);
+}
 
-function displayRepliesFromLocalStorage(questionElement) {
+function saveReplyToLocalStorage(questionText, reply) {
+    const replies = JSON.parse(localStorage.getItem('replies')) || {};
+    const questionKey = 'question_' + questionText; // נוסיף את הטקסט של השאלה כמפתח
+    replies[questionKey] = reply; // שמירת התגובה עבור המפתח המתאים
+    localStorage.setItem('replies', JSON.stringify(replies));
+}
 
-    // אחזור מפתח התשובה בהתאם לאינדקס השאלה
-  
-    const index = questionElement.getAttribute('data-index'); 
-    const key = 'reply_' + index;
-  
-    // אחזור את האובייקט התשובות מהlocalStorage
-    const replies = JSON.parse(localStorage.getItem('replies'));
-  
-    // אחזור את התשובה לשאלה הנוכחית
-    const reply = replies[key];
-  
-    // אם יש תשובה, הצג אותה 
-    if (reply) {
-      const replyElement = document.createElement('div');
-      replyElement.textContent = reply;
-      questionElement.appendChild(replyElement);
-    }
-  
-  }
