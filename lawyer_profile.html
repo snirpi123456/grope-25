@@ -110,6 +110,31 @@
         function redirectToEditProfile() {
             window.location.href = 'lawyer_personal_area.html'; // Link to the profile editing page
         }
+
+        const initialUsers = [
+    {
+        name: "אליזבת סול",
+        email: "elizabeth@example.com",
+        password: "el",
+        userType: "lawyer"
+    },
+    {
+        name: "שמעון זריהן",
+        email: "shimon@example.com",
+        password: "ya",
+        userType: "regular"
+    },
+    {
+       name: "מיכאל מימון",
+        email: "michael@example.com",
+        password: "ya",
+        userType: "regular" 
+    }
+];
+localStorage.setItem('users', JSON.stringify(initialUsers));
+const users = JSON.parse(localStorage.getItem('users')) || [];
+
+
     </script>
 </body>
 </html>
