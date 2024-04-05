@@ -1,4 +1,4 @@
-[8:46 אחה״צ, 3.4.2024] Vika🌻: const btn2 = document.getElementById("btn2");
+const btn2 = document.getElementById("btn2");
 const submitBtn = document.getElementById("submitBtn");
 
 btn2.addEventListener("click", function() {
@@ -23,34 +23,7 @@ submitBtn.addEventListener("click", function() {
         return;
     }
 
-    let questionText = קטגוריה: ${category}…
-[8:59 אחה״צ, 3.4.2024] Vika🌻: const btn2 = document.getElementById("btn2");
-const submitBtn = document.getElementById("submitBtn");
-
-btn2.addEventListener("click", function() {
-    document.getElementById("contactForm").style.display = "block";
-});
-
-submitBtn.addEventListener("click", function() {
-    const category = document.getElementById("categorySelect").value;
-    const subject = document.getElementById("subjectInput").value;
-    const question = document.getElementById("questionInput").value;
-
-    if (!category) {
-        alert("לא נבחרה קטגוריה!");
-        return;
-    } 
-    if (!subject.trim()) {
-        alert("חסר נושא!");
-        return;
-    } 
-    if (!question.trim()) {
-        alert("אנא רשום את השאלה שלך");
-        return;
-    }
-
-    let questionText = קטגוריה: ${category}\nנושא: ${subject}\nשאלה: ${question}\n\n;
-
+    let questionText = `קטגוריה: ${category}\nנושא: ${subject}\nשאלה: ${question}\n\n`;
 
     let existingQuestions = localStorage.getItem('questions') || '';
     existingQuestions += questionText;
@@ -157,11 +130,12 @@ function handleReply(event) {
 
     submitReplyBtn.addEventListener('click', function() {
         const reply = replyInput.value.trim();
-        const userDataString = localStorage.getItem('userData');
-        const firstItem = userDataArray[0]
+        const name = document.getElementById('name').value;
+        
+        // קריאה לשם הנכון של המשתנה userDataString
         if (reply !== '') {
             const replyText = document.createElement('div');
-            replyText.textContent = '<' + userData + '>'+ 'תשובה:'+ reply;
+            replyText.textContent = '<' + name + '>'+ 'תשובה:'+ reply; // קריאה ל userDataString
             questionElement.appendChild(replyText);
 
             // Save the reply to local storage
@@ -195,10 +169,10 @@ function displayRepliesFromLocalStorage(questionElement) {
     const key = 'reply_' + index;
   
     // אחזור את האובייקט התשובות מהlocalStorage
-    const replies = JSON.parse(localStorage.getItem('replies'));
+    const existingReplies = JSON.parse(localStorage.getItem('replies'));
   
     // אחזור את התשובה לשאלה הנוכחית
-    const reply = replies[key];
+    const reply = existingReplies[key];
   
     // אם יש תשובה, הצג אותה 
     if (reply) {
@@ -206,7 +180,4 @@ function displayRepliesFromLocalStorage(questionElement) {
         replyElement.textContent = reply;
         questionElement.appendChild(replyElement);
     }
-  
-  }
-
-
+}
