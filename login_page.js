@@ -3,7 +3,28 @@ const adminUser = {
     password: "admin123",
     role: "admin"
 };
-
+const users = [
+    {
+        name: "אליזבת סול",
+        email: "elizabeth@example.com",
+        password: "el",
+        userType: "lawyer"
+    },
+    {
+        name: "שמעון זריהן",
+        email: "shimon@example.com",
+        password: "ya",
+        userType: "regular"
+    },
+    {
+       name: "מיכאל מימון",
+        email: "michael@example.com",
+        password: "ya",
+        userType: "regular" 
+    }
+];
+localStorage.setItem('users', JSON.stringify(users));
+const loadedUsers = JSON.parse(localStorage.getItem('users'))
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
@@ -42,24 +63,18 @@ function saveUserData() {
 function authenticateUser() {
     const enteredEmail = document.getElementById('loginEmail').value;
     const enteredPassword = document.getElementById('loginPassword').value;
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     if (enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
         alert('התחברת בהצלחה כאדמין!');
         localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
         window.location.href = 'homePage.html';
         return;
-    }else{
-        alert('שם משתמש או סיסמא שגויים ')
-    }
-
-    const userData = JSON.parse(localStorage.getItem('userData'));
-
-    if (userData.email === enteredEmail && userData.password === enteredPassword) {
+    }else if(userData.email === enteredEmail && userData.password === enteredPassword) {
         alert('התחברת בהצלחה!');
         window.location.href = 'homePage.html';
-
-        localStorage.setItem('userData', JSON.stringify({ ...adminUser, isAuthenticated: true }));
-        window.location.href = 'homePage.html';
+        localStorage.setItem('userData', JSON.stringify({ ...userData, isAuthenticated: true }));
+        return;
     }else{
         alert('שם משתמש או סיסמא שגויים ')
     }
