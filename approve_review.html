@@ -84,7 +84,7 @@
 
                     const reviewContent = document.createElement('p');
                     reviewContent.classList.add('review-content');
-                    reviewContent.textContent = review;
+                    reviewContent.textContent = review.reviewText; // Display the review text, not the entire review object
                     listItem.appendChild(reviewContent);
 
                     const deleteButton = document.createElement('button');
