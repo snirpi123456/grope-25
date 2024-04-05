@@ -9,7 +9,7 @@ submitBtn.addEventListener("click", function() {
     const category = document.getElementById("categorySelect").value;
     const subject = document.getElementById("subjectInput").value;
     const question = document.getElementById("questionInput").value;
-    
+
     if (!category) {
         alert("לא נבחרה קטגוריה!");
         return;
@@ -23,17 +23,16 @@ submitBtn.addEventListener("click", function() {
         return;
     }
 
-    const questionText = `קטגוריה: ${category}\nנושא: ${subject}\nשאלה: ${question}\n\n`;
+    let questionText = `קטגוריה: ${category}\nנושא: ${subject}\nשאלה: ${question}\n\n`;
 
     let existingQuestions = localStorage.getItem('questions') || '';
-
     existingQuestions += questionText;
-
     localStorage.setItem('questions', existingQuestions);
 
     document.getElementById("categorySelect").selectedIndex = 0;
     document.getElementById("subjectInput").value = "";
     document.getElementById("questionInput").value = "";
+    document.getElementById("fileInput").value = "";
 
     document.getElementById("contactForm").style.display = "none";
 
@@ -46,7 +45,6 @@ function showCategories() {
     const categories = ["שיכון", "מיסים", "מלגות", "תעסוקה"];
     
     const categoryList = document.getElementById("categoryList");
-
     categoryList.innerHTML = "";
 
     categories.forEach(function(category) {
@@ -63,49 +61,59 @@ function showCategories() {
 }
 
 function showQuestions(category) {
+    // משיכת השאלות מהאחסון המקומי
     const questions = localStorage.getItem('questions') || '';
 
-    const questionArray = questions.split('\n\n');
-
-    const categoryQuestions = questionArray.filter(function(question) {
+    // חיפוש והצגת השאלות המתאימות לקטגוריה
+    const categoryQuestions = questions.split('\n\n').filter(function(question) {
         return question.includes('קטגוריה: ' + category);
     });
 
+    // אם אין שאלות בקטגוריה זו, הצג הודעה
     if (categoryQuestions.length === 0) {
         alert('אין שאלות מאוחסנות בקטגוריה זו.');
         return;
     }
 
-   
-    var questionsContainer = document.getElementById('questionsContainer');
-    questionsContainer.innerHTML = ''; 
+    // הצג את השאלות באיזור המתאים בדף
+    const questionsContainer = document.getElementById('questionsContainer');
+    questionsContainer.innerHTML = ''; // ניקוי תוכן קודם
 
     categoryQuestions.forEach(function(question, index) {
-        var questionElement = document.createElement('div');
+        const questionElement = document.createElement('div');
         questionElement.classList.add('question');
-    
-        var subjectText = document.createElement('span');
+
+        // נושא השאלה
+        const subjectText = document.createElement('span');
         subjectText.classList.add('storageTitle');
         subjectText.textContent = 'נושא: ';
         questionElement.appendChild(subjectText);
-    
-        var subject = document.createElement('span');
+
+        const subject = document.createElement('span');
         subject.textContent = question.split('\n')[1].replace('נושא: ', '');
         questionElement.appendChild(subject);
-    
-        var questionText = document.createElement('div');
+
+        // השאלה עצמה
+        const questionText = document.createElement('div');
         questionText.textContent = question.split('\n')[2].replace('שאלה: ', '');
         questionElement.appendChild(questionText);
-    
+
+        // הוספת כפתור השב
+        const replyBtn = document.createElement('button');
+        replyBtn.textContent = 'השב';
+        replyBtn.classList.add('replyBtn');
+        replyBtn.addEventListener('click', handleReply);
+        questionElement.appendChild(replyBtn);
+
+        // הוספת רווח בין השאלות, חוץ מהשאלה האחרונה
         if (index < categoryQuestions.length - 1) {
-            var spacer = document.createElement('br');
+            const spacer = document.createElement('br');
             questionElement.appendChild(spacer);
         }
 
-    questionsContainer.appendChild(questionElement);
-});
+        questionsContainer.appendChild(questionElement);
+    });
 }
-
 showCategories();
 
 document.querySelectorAll('.replyBtn').forEach(function(button) {
@@ -117,14 +125,17 @@ function handleReply(event) {
     const replyInput = document.createElement('textarea');
     replyInput.classList.add('replyInput');
     const submitReplyBtn = document.createElement('button');
-    submitReplyBtn.textContent = 'שלח תשובה';
+    submitReplyBtn.textContent = 'שלח תשובה'; // שינוי הטקסט לכפתור
     submitReplyBtn.classList.add('submitReplyBtn');
 
     submitReplyBtn.addEventListener('click', function() {
         const reply = replyInput.value.trim();
+        const name = document.getElementById('name').value;
+        
+        // קריאה לשם הנכון של המשתנה userDataString
         if (reply !== '') {
             const replyText = document.createElement('div');
-            replyText.textContent = 'תשובה: ' + reply;
+            replyText.textContent = '<' + name + '>'+ 'תשובה:'+ reply; // קריאה ל userDataString
             questionElement.appendChild(replyText);
 
             // Save the reply to local storage
@@ -134,6 +145,10 @@ function handleReply(event) {
 
             const category = questionElement.getAttribute('data-category');
             showQuestions(category);
+            
+            // Remove the reply input and submit button after sending the reply
+            questionElement.removeChild(replyInput);
+            questionElement.removeChild(submitReplyBtn);
         } else {
             alert('נא להזין תשובה לפני השליחה.');
         }
@@ -141,32 +156,28 @@ function handleReply(event) {
 
     questionElement.appendChild(replyInput);
     questionElement.appendChild(submitReplyBtn);
-}
 
-// Function to save the reply to local storage
-function saveReplyToLocalStorage(reply, questionElement) {
-    // Get the index of the question in the questions list
-    const index = Array.from(questionElement.parentNode.children).indexOf(questionElement);
-    // Create a unique key for the reply based on the question index
-    const key = 'reply_' + index;
-    let replies = JSON.parse(localStorage.getItem('replies')) || {};
-    replies[key] = reply;
-    localStorage.setItem('replies', JSON.stringify(replies));
+    // Remove the "השב" button after adding the reply input and submit button
+    questionElement.removeChild(event.target);
 }
 
 function displayRepliesFromLocalStorage(questionElement) {
-    const index = Array.from(questionElement.parentNode.children).indexOf(questionElement);
+
+    // אחזור מפתח התשובה בהתאם לאינדקס השאלה
+  
+    const index = questionElement.getAttribute('data-index'); 
     const key = 'reply_' + index;
-    const replies = JSON.parse(localStorage.getItem('replies')) || {};
-    const reply = replies[key];
+  
+    // אחזור את האובייקט התשובות מהlocalStorage
+    const existingReplies = JSON.parse(localStorage.getItem('replies'));
+  
+    // אחזור את התשובה לשאלה הנוכחית
+    const reply = existingReplies[key];
+  
+    // אם יש תשובה, הצג אותה 
     if (reply) {
         const replyElement = document.createElement('div');
-        replyElement.textContent = 'תשובה: ' + reply;
+        replyElement.textContent = reply;
         questionElement.appendChild(replyElement);
     }
 }
-
-document.querySelectorAll('.question').forEach(function(question) {
-    displayRepliesFromLocalStorage(question);
-    
-});
