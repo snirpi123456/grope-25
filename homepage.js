@@ -94,3 +94,8 @@ window.onload = function () {
         adminButton.style.display = "none";
     };
 }
+
+function isUserLawyer() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    return userData && userData.isAuthenticated && userData.role === 'lawyer';
+}
