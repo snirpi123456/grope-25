@@ -1,4 +1,4 @@
-function isUserAdmin() {
+function isUserAdmin() {//בדיקה אם אדמין
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser && currentUser.role === 'admin' && currentUser.userType != 'regular' && currentUser.userType != 'lawyer';
 }
@@ -50,4 +50,3 @@ function deleteUser(index) {
     localStorage.setItem('users', JSON.stringify(users)); 
     loadUsers();
 }
-

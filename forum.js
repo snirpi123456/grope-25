@@ -197,21 +197,3 @@ function handleReply(event) {
     // Remove the "השב" button after adding the reply input and submit button
     questionElement.removeChild(event.target);
 }
-
-function saveReplyToLocalStorage(questionText, reply) {
-    // Check if there are already stored replies in localStorage
-    let storedReplies = localStorage.getItem('replies');
-    if (!storedReplies) {
-        storedReplies = {};
-    } else {
-        storedReplies = JSON.parse(storedReplies);
-    }
-
-    // Add or update the reply for the current question
-    storedReplies[questionText] = reply;
-
-    // Save the updated replies back to localStorage
-    localStorage.setItem('replies', JSON.stringify(storedReplies));
-}
-
-
