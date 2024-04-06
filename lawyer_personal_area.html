@@ -91,8 +91,8 @@
             <label for="bio">ביוגרפיה:</label>
             <textarea id="bio" rows="4" required></textarea>
 
-            <label for="languages">שפות:</label>
-            <input type="text" id="specialty" required>
+            <label for="languages">שפות:</label> <!-- Added ID for languages -->
+            <input type="text" id="languages" required> <!-- Added ID for languages -->
             
             <label for="link">לינק לאתר אישי:</label>
             <input type="text" id="link">
@@ -105,25 +105,22 @@
     </div>
 
     <script>
-      function saveProfile(event) {
-    event.preventDefault(); 
+        function saveProfile(event) {
+            event.preventDefault(); 
 
-   
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const specialty = document.getElementById('specialty').value;
-    const bio = document.getElementById('bio').value;
-    const languages = document.getElementById('languages').value;
-    const link = document.getElementById('link').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const specialty = document.getElementById('specialty').value;
+            const bio = document.getElementById('bio').value;
+            const languages = document.getElementById('languages').value; 
+            const link = document.getElementById('link').value;
 
-    
-    const userData = { name, email, specialty, bio, languages, link };
+            const userData = { name, email, specialty, bio, languages, link };
 
-        localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('userData', JSON.stringify(userData));
 
-    
-    window.location.href = 'lawyer_profile.html';
-}
+            window.location.href = 'lawyer_profile.html';
+        }
     </script>
 </body>
 </html>
