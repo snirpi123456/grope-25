@@ -148,24 +148,20 @@ document.querySelectorAll('.replyBtn').forEach(function(button) {
 });
 
 
-function saveReplyToLocalStorage(questionText, reply) {
-    const replies = JSON.parse(localStorage.getItem('replies')) || {};
-    const questionKey = 'question_' + questionText; // נוסיף את הטקסט של השאלה כמפתח
-    replies[questionKey] = reply; // שמירת התגובה עבור המפתח המתאים
-    localStorage.setItem('replies', JSON.stringify(replies));
-}
+
+
 
 function handleReply(event) {
     const questionElement = event.target.parentNode;
     const replyInput = document.createElement('textarea');
     replyInput.classList.add('replyInput');
     const submitReplyBtn = document.createElement('button');
-    submitReplyBtn.textContent = 'שלח תשובה'; // שינוי הטקסט לכפתור
+    submitReplyBtn.textContent = 'שלח תשובה';
     submitReplyBtn.classList.add('submitReplyBtn');
 
     submitReplyBtn.addEventListener('click', function() {
         const reply = replyInput.value.trim();
-        const userDataString = localStorage.getItem('userData'); // משיכת מחרוזת המידע מהאחסון המקומי
+        const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const username = userData.name;
 
@@ -175,19 +171,14 @@ function handleReply(event) {
             replyText.classList.add('reply-text');
             questionElement.appendChild(replyText);
 
-            // Save the reply to local storage
-            saveReplyToLocalStorage(reply, questionElement.getAttribute('data-index')); // Pass the question element's index as an argument
+            // Get the question text from the question element
+            const questionText = questionElement.querySelector('.questionText').textContent;
 
-            const category = questionElement.getAttribute('data-category');
-            showQuestions(category);
+            // Save the reply to local storage using the question text as the key
+            saveReplyToLocalStorage(questionText, reply);
 
             // Add the answer to the question
             addAnswer(questionElement, reply);
-
-            // Display user's question
-            const userQuestion = document.getElementById('questionInput').value;
-            const questionContainer = document.querySelector('.question[data-index="1"] .userQuestion');
-            questionContainer.textContent = userQuestion;
 
             // Remove the reply input and submit button after sending the reply
             questionElement.removeChild(replyInput);
@@ -207,21 +198,4 @@ function handleReply(event) {
     questionElement.removeChild(event.target);
 }
 
-// Function to add an answer to a question item
-function addAnswer(questionItem, answerText) {
-    const answersDiv = questionItem.querySelector('.answers');
-    const answerElement = document.createElement('div');
-    answerElement.classList.add('answer');
-    answerElement.textContent = answerText;
-    answersDiv.appendChild(answerElement);
-    const questionText = questionItem.querySelector('p').textContent;
-    saveAnswerToLocalStorage(questionText, answerText);
-}
-
-function saveReplyToLocalStorage(questionText, reply) {
-    const replies = JSON.parse(localStorage.getItem('replies')) || {};
-    const questionKey = 'question_' + questionText; // נוסיף את הטקסט של השאלה כמפתח
-    replies[questionKey] = reply; // שמירת התגובה עבור המפתח המתאים
-    localStorage.setItem('replies', JSON.stringify(replies));
-}
 
