@@ -197,5 +197,3 @@ function handleReply(event) {
     // Remove the "השב" button after adding the reply input and submit button
     questionElement.removeChild(event.target);
 }
-
-

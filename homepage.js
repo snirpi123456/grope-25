@@ -95,7 +95,7 @@ window.onload = function () {
     };
 }
 
-function showPersonalAreaButton() {
+function showPersonalAreaButton() {//תנאי כניסה לאיזור אישי 
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
         const userData = JSON.parse(userDataString);
