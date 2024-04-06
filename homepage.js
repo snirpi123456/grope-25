@@ -95,7 +95,17 @@ window.onload = function () {
     };
 }
 
-function isUserLawyer() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    return userData && userData.isAuthenticated && userData.role === 'lawyer';
+function showPersonalAreaButton() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        const userType = userData.userType;
+        if (userType === 'lawyer') {
+            document.getElementById("personalAreaButton").style.display = "block";
+        } else {
+            alert("אין לך הרשאה.");
+        }
+    } else {
+        alert("אנא התחבר למערכת.");
+    }
 }
