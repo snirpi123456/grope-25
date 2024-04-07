@@ -71,7 +71,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             displayReviews();
         });
-
+//מציג את הביקורות
         function displayReviews() {
             const reviewList = document.getElementById('reviewList');
             reviewList.innerHTML = '';
@@ -84,7 +84,7 @@
 
                     const reviewContent = document.createElement('p');
                     reviewContent.classList.add('review-content');
-                    reviewContent.textContent = review.reviewText; // Display the review text, not the entire review object
+                    reviewContent.textContent = review.reviewText; // Display the review text
                     listItem.appendChild(reviewContent);
 
                     const deleteButton = document.createElement('button');
@@ -99,7 +99,7 @@
                 });
             }
         }
-
+//מחיקת הביקורות
         function deleteReview(index) {
             let reviews = JSON.parse(localStorage.getItem('reviews'));
 

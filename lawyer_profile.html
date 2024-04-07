@@ -75,6 +75,7 @@
     </div>
 
     <script>
+        //מציג את כל הפרטים של העורך דין
         document.addEventListener('DOMContentLoaded', function() {
             const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -107,6 +108,7 @@
                 profileDetails.appendChild(linkAnchor);
             }
         });
+        //בליחצה על כפתור עריכת פרופיל מעבר לעריכה
         function redirectToEditProfile() {
             window.location.href = 'lawyer_personal_area.html'; // Link to the profile editing page
         }
